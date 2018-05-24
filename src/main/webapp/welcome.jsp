@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Create an account</title>
+    <title>Welcome</title>
 
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -35,20 +35,76 @@
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
 
     </c:if>
-
-	<button onClick="showUsers()">Show all users</button>
+	
+	<button id ="showUser" style = " display: none;" onClick="showUsers()">Show all users</button>
+	<button id ="backgrd" style = " display: none;"  onClick="changeBackground()">Background Color</button>
+	<button id ="writeS" style = " display: none;"  onClick="writeS()">Write something.</button>
+	<button id ="alertme" onClick="alertMe()">Alert me</button>
 	<p id="allUsers"></p>
 </div>
 <!-- /container -->
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 <script>
+
+	$(document).ready(function(){
+		$.ajax({
+			url: "../user/getUserRole",
+			success: function(data){
+				if(data=="REGULAR"){
+					document.getElementById("writeS").style.display = "inline";
+				}
+				else if(data=="AGENT"){
+					document.getElementById("backgrd").style.display= "inline";
+				}
+				else if(data=="ADMIN"){
+					document.getElementById("showUser").style.display = "inline";
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log("asa");
+		        console.log(xhr.responseText);
+		      }
+		});
+	});
+		
 	function showUsers(){
 		$.ajax({
 			url: "../user/getUsers",
 			success: function(data){
 				document.getElementById("allUsers").innerHTML = data;
 			}
+			
 		});
+	}
+	
+	function changeBackground(){
+		$.ajax({
+			url: "../user/getUsersCol",
+			success: function(data){
+				$("div").css("background-color", data);
+			}
+			
+		});
+		
+	}
+	
+	function writeS(){
+		console.log("ASD");
+		$.ajax({
+			url: "../user/getUsersEmail",
+			success: function(data){
+				console.log(data);
+				document.getElementById("allUsers").innerHTML = data;
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log("asa");
+		        console.log(xhr.responseText);
+		      }
+		});
+	}
+	
+	function alertMe(){
+		alert("Za sve korisnike.");
 	}
 </script>
 </body>

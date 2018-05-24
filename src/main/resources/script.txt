@@ -12,4 +12,4 @@ insert into USER_ROLE values(3, 2);
 
 //pass = Bezlosmija43
 
-// twiste regular, bei admin, gula agent
+// twiste regular, bei admin, guxla agent
