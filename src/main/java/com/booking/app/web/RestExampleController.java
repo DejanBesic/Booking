@@ -20,9 +20,9 @@ public class RestExampleController {
 	@Autowired
 	UserRepository userRepository;
 	
-	@PreAuthorize("hasRole('REGULAR')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/getUsers", method = RequestMethod.GET)
-	public ResponseEntity<List<User>> getUsers(){
-		return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+	public ResponseEntity<String> getUsers(){
+		return new ResponseEntity<>("asaa", HttpStatus.OK);
 	}
 }
