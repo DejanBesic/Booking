@@ -1,6 +1,8 @@
 package com.booking.app.model;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,6 +17,11 @@ public class User {
     private boolean active;
 	private Set<Role> roles;
 
+	
+	public User(){
+		roles = new HashSet<Role>();
+	}
+	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
