@@ -11,6 +11,8 @@ public class User {
     private String password;
     private String passwordConfirm;
     private String email;
+    private String token;
+    private boolean active;
 	private Set<Role> roles;
 
     @Id
@@ -67,4 +69,20 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.booking.app.model.Role;
 import com.booking.app.model.User;
 import com.booking.app.repository.RoleRepository;
 import com.booking.app.repository.UserRepository;
@@ -22,7 +23,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        HashSet<Role> hs = new HashSet();
+        hs.add(roleRepository.findById((long) 1));
+        user.setRoles(hs);
         userRepository.save(user);
     }
 

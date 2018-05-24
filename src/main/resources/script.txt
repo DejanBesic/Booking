@@ -1,0 +1,15 @@
+insert into role values(1, 'REGULAR');
+insert into role values(2, 'AGENT');
+insert into role values(3, 'ADMIN');
+
+insert into user values(1, 'TRUE', 'a@a', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'tkn1', 'stefan');
+insert into user values(2, 'TRUE', 'b@b', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'tkn2', 'dejan');
+insert into user values(3, 'TRUE', 'c@c', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'tkn3', 'mario');
+
+insert into USER_ROLE values(1, 1);
+insert into USER_ROLE values(2, 3);
+insert into USER_ROLE values(3, 2);
+
+//pass = Bezlosmija43
+
+// twiste regular, bei admin, gula agent

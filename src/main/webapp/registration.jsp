@@ -19,6 +19,8 @@
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+	
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -32,6 +34,14 @@
 
     <form:form method="POST" modelAttribute="userForm" class="form-signin">
         <h2 class="form-signin-heading">Create your account</h2>
+                
+        <spring:bind path="email">
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+                <form:input type="email" path="email" class="form-control"
+                            placeholder="Email"></form:input>
+                <form:errors path="email"></form:errors>
+            </div>
+        </spring:bind>
         <spring:bind path="username">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="username" class="form-control" placeholder="Username"
@@ -54,14 +64,9 @@
                 <form:errors path="passwordConfirm"></form:errors>
             </div>
         </spring:bind>
-        
-        <spring:bind path="email">
-            <div class="form-group ${status.error ? 'has-error' : ''}">
-                <form:input type="email" path="email" class="form-control"
-                            placeholder="Email"></form:input>
-                <form:errors path="email"></form:errors>
-            </div>
-        </spring:bind>
+		 <div class="g-recaptcha"
+		    data-sitekey="6LfXLFsUAAAAAG6-4vpoQK9VbwgIPX_0L5w-P_9X">
+		 </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form:form>
