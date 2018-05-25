@@ -71,7 +71,10 @@
 		$.ajax({
 			url: "../user/getUsers",
 			success: function(data){
-				document.getElementById("allUsers").innerHTML = data;
+				document.getElementById("allUsers").innerHTML = "";
+				for(var i in data){
+					document.getElementById("allUsers").innerHTML += data[i]+'</br>';
+				}
 			}
 			
 		});

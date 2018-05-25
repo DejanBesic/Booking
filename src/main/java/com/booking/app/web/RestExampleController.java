@@ -1,6 +1,8 @@
 package com.booking.app.web;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,8 +27,13 @@ public class RestExampleController {
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value="/getUsers", method = RequestMethod.GET)
-	public ResponseEntity<String> getUsers(){
-		return new ResponseEntity<>("asaa", HttpStatus.OK);
+	public ResponseEntity<?> getUsers(){
+		List<User> users = userRepository.findAll();
+		ArrayList<String> usernms = new ArrayList<String>();
+		for(User u : users) {
+			usernms.add(u.getUsername());
+		}
+		return new ResponseEntity<>(usernms, HttpStatus.OK);
 	}
 	
 	@PreAuthorize("hasAuthority('REGULAR')")
