@@ -1,4 +1,4 @@
-package com.booking.app.service;
+package com.booking.app.service.impl;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.booking.app;
+package com.booking.app.config;
 
 import java.util.Properties;
 

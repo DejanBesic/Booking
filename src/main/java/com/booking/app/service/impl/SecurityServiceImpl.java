@@ -1,4 +1,4 @@
-package com.booking.app.service;
+package com.booking.app.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+import com.booking.app.service.SecurityService;
 
 @Service
 public class SecurityServiceImpl implements SecurityService{
@@ -42,4 +44,21 @@ public class SecurityServiceImpl implements SecurityService{
             logger.debug(String.format("Auto login %s successfully!", username));
         }
     }
+
+	@Override
+	public UserDetails login(String username, String password) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+
+        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+
+        if (usernamePasswordAuthenticationToken.isAuthenticated()) {
+            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            return userDetails;
+        }
+		
+        return null;
+	}
+    
+    
 }

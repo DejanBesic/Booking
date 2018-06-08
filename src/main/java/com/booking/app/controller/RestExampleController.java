@@ -1,4 +1,4 @@
-package com.booking.app.web;
+package com.booking.app.controller;
 
 import java.util.ArrayList;
 import java.util.Iterator;
