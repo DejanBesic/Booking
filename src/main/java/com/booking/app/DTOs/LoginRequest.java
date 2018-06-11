@@ -1,4 +1,4 @@
-package com.booking.app.model;
+package com.booking.app.DTOs;
 
 
 /**

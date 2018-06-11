@@ -1,4 +1,4 @@
-package com.booking.app.model;
+package com.booking.app.DTOs;
 
 /**
  * Created by rajeevkumarsingh on 19/08/17.

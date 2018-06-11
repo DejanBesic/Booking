@@ -2,9 +2,9 @@ package com.booking.app.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,8 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.booking.app.model.JwtAuthenticationResponse;
-import com.booking.app.model.LoginRequest;
+import com.booking.app.DTOs.JwtAuthenticationResponse;
+import com.booking.app.DTOs.LoginRequest;
+import com.booking.app.DTOs.RegistrationResponse;
+import com.booking.app.DTOs.SignUpRequest;
+import com.booking.app.model.Role;
+import com.booking.app.model.User;
+import com.booking.app.repository.RoleRepository;
 import com.booking.app.repository.UserRepository;
 import com.booking.app.security.JwtTokenProvider;
 
@@ -36,8 +41,8 @@ public class AuthController {
     @Autowired
     UserRepository userRepository;
 
-//    @Autowired
-//    RoleRepository roleRepository;
+    @Autowired
+    RoleRepository roleRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -46,14 +51,10 @@ public class AuthController {
     JwtTokenProvider tokenProvider;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsernameOrEmail(),
-                        loginRequest.getPassword()
-                )
-        );
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
+    	Authentication authentication = autoLogin(loginRequest.getUsernameOrEmail(), loginRequest.getPassword());
+    	
         SecurityContextHolder.getContext().setAuthentication(authentication);
         
         String jwt = tokenProvider.generateToken(authentication);
@@ -76,35 +77,46 @@ public class AuthController {
     }
     
 
-//    @PostMapping("/signup")
-//    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-//        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
-//            return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
-//                    HttpStatus.BAD_REQUEST);
-//        }
-//
-//        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-//            return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
-//                    HttpStatus.BAD_REQUEST);
-//        }
-//
-//        // Creating user's account
-//        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-//                signUpRequest.getEmail(), signUpRequest.getPassword());
-//
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//
-//        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-//                .orElseThrow(() -> new AppException("User Role not set."));
-//
-//        user.setRoles(Collections.singleton(userRole));
-//
-//        User result = userRepository.save(user);
-//
-//        URI location = ServletUriComponentsBuilder
-//                .fromCurrentContextPath().path("/users/{username}")
-//                .buildAndExpand(result.getUsername()).toUri();
-//
-//        return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
-//    }
+    @PostMapping("/signup")
+    public ResponseEntity<RegistrationResponse> registerUser(@RequestBody SignUpRequest signUpRequest) {
+        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return new ResponseEntity<>(new RegistrationResponse(false, "Username is already taken!"), HttpStatus.BAD_REQUEST);
+        }
+
+        if(userRepository.existsByEmail(signUpRequest.getEmail())) {
+        	return new ResponseEntity<>(new RegistrationResponse(false, "Email address is already in use!"), HttpStatus.BAD_REQUEST);
+        }
+
+        // Creating user's account
+        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        //Adding roles
+        Role userRole = roleRepository.findByName("REGULAR");
+        user.getRoles().add(userRole);
+
+        //Save in base
+        User result = userRepository.save(user);
+
+        //Login user
+        Authentication authentication = autoLogin(result.getUsername(), result.getPassword());
+        
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
+        String jwt = tokenProvider.generateToken(authentication);
+        
+        //return jwt token
+        return new ResponseEntity<>(new RegistrationResponse(true, jwt), HttpStatus.BAD_REQUEST);
+    }
+    
+    
+    
+    private Authentication autoLogin(String username, String password) {
+    	return authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        username,
+                        password
+                )
+        );
+    }
 }
