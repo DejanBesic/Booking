@@ -52,13 +52,18 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-
-    	Authentication authentication = autoLogin(loginRequest.getUsernameOrEmail(), loginRequest.getPassword());
+    	Authentication authentication = null;
+    	
+    	try {
+    		authentication = autoLogin(loginRequest.getUsernameOrEmail(), loginRequest.getPassword());
+    	}catch(Exception e){
+    		return new ResponseEntity<>("Wrong username or password", HttpStatus.BAD_REQUEST);
+    	}
     	
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        
+        return new ResponseEntity<>(new JwtAuthenticationResponse(jwt), HttpStatus.OK);
     }
     
     @GetMapping("/GetUser")
@@ -96,17 +101,9 @@ public class AuthController {
         user.getRoles().add(userRole);
 
         //Save in base
-        User result = userRepository.save(user);
+        userRepository.save(user);
 
-        //Login user
-        Authentication authentication = autoLogin(result.getUsername(), result.getPassword());
-        
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        
-        String jwt = tokenProvider.generateToken(authentication);
-        
-        //return jwt token
-        return new ResponseEntity<>(new RegistrationResponse(true, jwt), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new RegistrationResponse(true, "Successfuly registrated."), HttpStatus.OK);
     }
     
     

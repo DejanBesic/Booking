@@ -9,6 +9,10 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
     private Long id;
+    private String name;
+    private String lastName;
+    private String address;
+    private String pmb;
     private String username;
     private String password;
     private String passwordConfirm;
@@ -99,4 +103,38 @@ public class User {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPmb() {
+		return pmb;
+	}
+
+	public void setPmb(String pmb) {
+		this.pmb = pmb;
+	}
+	
+	
 }
