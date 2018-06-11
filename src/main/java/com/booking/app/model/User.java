@@ -22,6 +22,13 @@ public class User {
 		roles = new HashSet<Role>();
 	}
 	
+	public User(String username, String email, String password) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.roles = new HashSet<Role>();
+	}
+	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
