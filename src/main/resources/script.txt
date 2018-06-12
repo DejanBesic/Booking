@@ -2,13 +2,29 @@ insert into role values(1, 'REGULAR');
 insert into role values(2, 'AGENT');
 insert into role values(3, 'ADMIN');
 
-insert into user values(1, 'TRUE', 'a@a', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'tkn1', 'stefan');
-insert into user values(2, 'TRUE', 'b@b', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'tkn2', 'dejan');
-insert into user values(3, 'TRUE', 'c@c', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'tkn3', 'mario');
+insert into user values(1, 'TRUE','Address of Stefan', 'a@a', 'Radanovic', 'Stefan', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG','pmb of Stefan', 'tkn1', 'twiste');
+insert into user values(2, 'TRUE', 'Address of Dejan', 'b@b', 'Besic', 'Dejan', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'pmb of Dejan', 'tkn2', 'bei');
+insert into user values(3, 'TRUE', 'Address of Mario', 'c@c', 'Gula', 'Mario','$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG','pmb of Mario', 'tkn3', 'guxla');
 
 insert into USER_ROLE values(1, 1);
 insert into USER_ROLE values(2, 3);
 insert into USER_ROLE values(3, 2);
+
+insert into FACILITY_TYPE values(1, 'Hotel');
+insert into FACILITY_TYPE values(2, 'House');
+insert into FACILITY_TYPE values(3, 'Mansion');
+
+insert into FACILITY values(1, 5, 'Address of Facility 1', true, false, 'Description of Facility 1', false, true, true, 'Facility 1', 4, false, true, true, 1, 1);
+insert into FACILITY values(2, 3, 'Address of Facility 2', true, false, 'Description of Facility 2', false, false, false, 'Facility 2', 4, false, true, false, 2, 1);
+insert into FACILITY values(3, 2, 'Address of Facility 3', true, false, 'Description of Facility 3', false, true, true, 'Facility 3', 4, true, true, false, 2, 3);
+insert into FACILITY values(4, 2, 'Address of Facility 4', true, false, 'Description of Facility 4', false, true, true, 'Facility 4', 4, false, true, true, 3, 2);
+
+insert into RATING values(1, 'Comment 1', 5, 2, 1);
+insert into RATING values(2, 'Comment 1', 5, 3, 2);
+insert into RATING values(3, 'Comment 1', 5, 3, 1);
+insert into RATING values(4, 'Comment 1', 5, 2, 1);
+insert into RATING values(5, 'Comment 1', 5, 1, 2);
+insert into RATING values(6, 'Comment 1', 5, 2, 3);
 
 //pass = Bezlosmija43
 
