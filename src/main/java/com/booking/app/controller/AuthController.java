@@ -24,13 +24,10 @@ import com.booking.app.DTOs.RegistrationResponse;
 import com.booking.app.DTOs.SignUpRequest;
 import com.booking.app.model.Role;
 import com.booking.app.model.User;
-import com.booking.app.repository.RoleRepository;
 import com.booking.app.repository.UserRepository;
 import com.booking.app.security.JwtTokenProvider;
+import com.booking.app.service.impl.RoleServiceImpl;
 
-/**
- * Created by rajeevkumarsingh on 02/08/17.
- */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -42,7 +39,7 @@ public class AuthController {
     UserRepository userRepository;
 
     @Autowired
-    RoleRepository roleRepository;
+    RoleServiceImpl roleService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -92,13 +89,12 @@ public class AuthController {
         	return new ResponseEntity<>(new RegistrationResponse(false, "Email address is already in use!"), HttpStatus.BAD_REQUEST);
         }
 
+        
+        Role role = roleService.findByName("REGULAR");
+        
         // Creating user's account
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword());
+        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), signUpRequest.getPassword(), role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        //Adding roles
-        Role userRole = roleRepository.findByName("REGULAR");
-        user.getRoles().add(userRole);
 
         //Save in base
         User result = userRepository.save(user);

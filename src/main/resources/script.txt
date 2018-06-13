@@ -2,13 +2,9 @@ insert into role values(1, 'REGULAR');
 insert into role values(2, 'AGENT');
 insert into role values(3, 'ADMIN');
 
-insert into user values(1, 'TRUE','Address of Stefan', 'a@a', 'Radanovic', 'Stefan', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG','pmb of Stefan', 'tkn1', 'twiste');
-insert into user values(2, 'TRUE', 'Address of Dejan', 'b@b', 'Besic', 'Dejan', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'pmb of Dejan', 'tkn2', 'bei');
-insert into user values(3, 'TRUE', 'Address of Mario', 'c@c', 'Gula', 'Mario','$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG','pmb of Mario', 'tkn3', 'guxla');
-
-insert into USER_ROLE values(1, 1);
-insert into USER_ROLE values(2, 3);
-insert into USER_ROLE values(3, 2);
+insert into user values(1, 'TRUE','Address of Stefan', 'a@a', 'Radanovic', 'Stefan', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG','pmb of Stefan', 'tkn1', 'twiste', 1);
+insert into user values(2, 'TRUE', 'Address of Dejan', 'b@b', 'Besic', 'Dejan', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'pmb of Dejan', 'tkn2', 'bei', 3);
+insert into user values(3, 'TRUE', 'Address of Mario', 'c@c', 'Gula', 'Mario','$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG','pmb of Mario', 'tkn3', 'guxla', 2);
 
 insert into FACILITY_TYPE values(1, 'Hotel');
 insert into FACILITY_TYPE values(2, 'House');

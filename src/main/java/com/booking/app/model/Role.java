@@ -1,17 +1,29 @@
 package com.booking.app.model;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "role")
 public class Role {
-    private Long id;
-    private String name;
-    private Set<User> users;
-
-    @Id
+   
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	 
+	@Column(nullable = false)
+    private String name;
+	
+	public Role(){
+		
+	}
+	
+	public Role(String name){
+		this.name = name;
+	}
+
     public Long getId() {
         return id;
     }
@@ -26,14 +38,5 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @ManyToMany(mappedBy = "roles")
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 }

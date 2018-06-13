@@ -1,13 +1,10 @@
 package com.booking.app.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -26,9 +23,6 @@ public class Facility {
 	
 	@ManyToOne(optional = false)
 	private User owner;
-	
-	@ManyToMany
-	private Set<Image> images;
 	
 	@ManyToOne(optional = false)
 	private FacilityType type;
@@ -70,13 +64,12 @@ public class Facility {
 		
 	}
 
-	public Facility(String name, int category, User owner, Set<Image> images,
-			FacilityType type, String description, String address, int numberOfPepople) {
+	public Facility(String name, int category, User owner, FacilityType type, 
+			String description, String address, int numberOfPepople) {
 		super();
 		this.name = name;
 		Category = category;
 		this.owner = owner;
-		this.images = images;
 		this.type = type;
 		this.description = description;
 		this.address = address;
@@ -112,17 +105,7 @@ public class Facility {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-
-
-	public Set<Image> getImages() {
-		return images;
-	}
-
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
-	}
-
+	
 
 	public FacilityType getType() {
 		return type;

@@ -1,40 +1,71 @@
 package com.booking.app.model;
 
-import javax.persistence.*;
+import java.io.Serializable;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "user")
-public class User {
-    private Long id;
-    private String name;
-    private String lastName;
-    private String address;
-    private String pmb;
-    private String username;
-    private String password;
-    private String passwordConfirm;
-    private String email;
-    private String token;
-    private boolean active;
-	private Set<Role> roles;
-
-	
-	public User(){
-		roles = new HashSet<Role>();
-	}
-	
-	public User(String username, String email, String password) {
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.roles = new HashSet<Role>();
-	}
+public class User implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+    
+    @Column(nullable = true)
+    private String name;
+    
+    @Column(nullable = true)
+    private String lastName;
+    
+    @Column(nullable = true)
+    private String address;
+    
+    @Column(nullable = true)
+    private String pmb;
+    
+    @Column(nullable = false)
+    private String username;
+    
+    @Transient
+    @Column(nullable = false)
+    private String password;
+    
+    private String passwordConfirm;
+    
+    @Column(nullable = false)
+    private String email;
+    
+    @Column(nullable = true)
+    private String token;
+    
+    @Column(nullable = true)
+    private boolean active;
+    
+    @ManyToOne(optional = false)
+	private Role role;
+
+	
+	public User(){
+	}
+	
+	public User(String username, String email, String password, Role role) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+	
+
     public Long getId() {
         return id;
     }
@@ -69,7 +100,6 @@ public class User {
         this.password = password;
     }
 
-    @Transient
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
@@ -78,15 +108,15 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public Set<Role> getRoles() {
-        return roles;
-    }
+    
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
 	public String getToken() {
 		return token;
