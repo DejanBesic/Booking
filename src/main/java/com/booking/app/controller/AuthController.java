@@ -101,7 +101,11 @@ public class AuthController {
         user.getRoles().add(userRole);
 
         //Save in base
-        userRepository.save(user);
+        User result = userRepository.save(user);
+        
+        if(result == null) {
+        	return new ResponseEntity<>(new RegistrationResponse(false, "Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
         return new ResponseEntity<>(new RegistrationResponse(true, "Successfuly registrated."), HttpStatus.OK);
     }
