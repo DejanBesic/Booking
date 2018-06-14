@@ -2,6 +2,7 @@ package com.booking.app.service;
 
 import java.util.List;
 
+import com.booking.app.DTOs.SearchRequest;
 import com.booking.app.model.Appointment;
 
 public interface AppointmentService {
@@ -13,5 +14,7 @@ public interface AppointmentService {
 	Appointment save(Appointment appointment);
 	
 	void delete(Long id);
+
+	List<Appointment> findBySearch(SearchRequest searchRequest);
 	
 }

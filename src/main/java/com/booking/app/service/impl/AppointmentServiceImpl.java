@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booking.app.DTOs.SearchRequest;
 import com.booking.app.model.Appointment;
 import com.booking.app.repository.AppointmentRepository;
 import com.booking.app.service.AppointmentService;
@@ -34,6 +35,11 @@ public class AppointmentServiceImpl implements AppointmentService{
 	public void delete(Long id) {
 		appointmentRepository.delete(id);
 		
+	}
+	
+	@Override
+	public List<Appointment> findBySearch(SearchRequest searchRequest){
+		return null;
 	}
 
 }
