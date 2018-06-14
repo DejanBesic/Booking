@@ -36,10 +36,10 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String username;
     
-    @Transient
     @Column(nullable = false)
     private String password;
     
+    @Transient
     private String passwordConfirm;
     
     @Column(nullable = false)

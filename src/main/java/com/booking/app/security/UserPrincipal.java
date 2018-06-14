@@ -13,7 +13,12 @@ import com.booking.app.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserPrincipal implements UserDetails {
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private String name;
 

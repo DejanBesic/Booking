@@ -2,18 +2,27 @@ insert into role values(1, 'REGULAR');
 insert into role values(2, 'AGENT');
 insert into role values(3, 'ADMIN');
 
-insert into user values(1, 'TRUE','Address of Stefan', 'a@a', 'Radanovic', 'Stefan', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG','pmb of Stefan', 'tkn1', 'twiste', 1);
-insert into user values(2, 'TRUE', 'Address of Dejan', 'b@b', 'Besic', 'Dejan', '$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'pmb of Dejan', 'tkn2', 'bei', 3);
-insert into user values(3, 'TRUE', 'Address of Mario', 'c@c', 'Gula', 'Mario','$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG','pmb of Mario', 'tkn3', 'guxla', 2);
+insert into LOCATION values(1, 'Miami');
+insert into LOCATION values(2, 'Belgrade');
+insert into LOCATION values(3, 'Hawai');
+insert into LOCATION values(4, 'Hong Kong');
+
+insert into user values(1, 'TRUE',	'Address of Stefan',	'a@a', 'Radanovic', 'Stefan', 	'$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG',	'pmb of Stefan', 'tkn1', 	'twiste', 1);
+insert into user values(2, 'TRUE', 	'Address of Dejan', 	'b@b', 'Besic', 	'Dejan', 	'$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG', 'pmb of Dejan', 'tkn2', 	'bei', 3);
+insert into user values(3, 'TRUE', 	'Address of Mario', 	'c@c', 'Gula', 		'Mario',	'$2a$10$x9IJmUtQpWc/L0yFDcUQSuhHNpPBpW67zDialYFSQmurPs1isvyNG',	'pmb of Mario', 'tkn3', 	'guxla', 2);
 
 insert into FACILITY_TYPE values(1, 'Hotel');
 insert into FACILITY_TYPE values(2, 'House');
 insert into FACILITY_TYPE values(3, 'Mansion');
 
-insert into FACILITY values(1, 5, 'Address of Facility 1', true, false, 'Description of Facility 1', false, true, true, 'Facility 1', 4, false, true, true, 1, 1);
-insert into FACILITY values(2, 3, 'Address of Facility 2', true, false, 'Description of Facility 2', false, false, false, 'Facility 2', 4, false, true, false, 2, 1);
-insert into FACILITY values(3, 2, 'Address of Facility 3', true, false, 'Description of Facility 3', false, true, true, 'Facility 3', 4, true, true, false, 2, 3);
-insert into FACILITY values(4, 2, 'Address of Facility 4', true, false, 'Description of Facility 4', false, true, true, 'Facility 4', 4, false, true, true, 3, 2);
+insert into FACILITY values(1, 5, 'Address of Facility 1', true, false,	'Description of Facility 1',   false, 	true,   true,	'Facility 1',   2,  false,  true,   true,	1, 1, 1);
+insert into FACILITY values(2, 3, 'Address of Facility 2', true, false, 'Description of Facility 2',   true,  	false,	false,  'Facility 2',   3,  false,  true,   false, 	2, 2, 1);
+insert into FACILITY values(3, 2, 'Address of Facility 3', true, true,  'Description of Facility 3',   false, 	true,   true,   'Facility 3',   4,  true,   true,   false,	3, 2, 3);
+insert into FACILITY values(4, 2, 'Address of Facility 4', true, false, 'Description of Facility 4',   true,  	false,  true,   'Facility 4',   2,  false,  true,   true, 	3, 3, 2);
+insert into FACILITY values(5, 5, 'Address of Facility 5', true, true,  'Description of Facility 5',   false, 	true,   false,  'Facility 5',   3,  false,  true,   true, 	2, 1, 1);
+insert into FACILITY values(6, 3, 'Address of Facility 6', true, false, 'Description of Facility 6',   false, 	false,  false,  'Facility 6',   4,  false,  true,   false, 	1, 2, 1);
+insert into FACILITY values(7, 2, 'Address of Facility 7', true, true,  'Description of Facility 7',   true,   	true,   true,   'Facility 7',   5,	true,   true,   false, 	4, 2, 3);
+insert into FACILITY values(8, 2, 'Address of Facility 8', true, false, 'Description of Facility 8',   true,	true,   true,   'Facility 8',   6,  false,  true,   true, 	3, 3, 2);
 
 insert into RATING values(1, 'Comment 1', 5, 2, 1);
 insert into RATING values(2, 'Comment 1', 5, 3, 2);

@@ -33,6 +33,9 @@ public class Facility {
 	@Column(nullable = false)
 	private String address;
 	
+	@ManyToOne(optional = false)
+	private Location location;
+	
 	@Column(nullable = false)
 	private boolean parkingLot;
 	
@@ -58,14 +61,15 @@ public class Facility {
 	private boolean bathroom;	
 	
 	@Column(nullable = false)
-	private int numberOfPepople;
+	private int numberOfPeople;
 	
 	public Facility() {
 		
 	}
 
-	public Facility(String name, int category, User owner, FacilityType type, 
-			String description, String address, int numberOfPepople) {
+	public Facility(String name, int category, User owner, FacilityType type, String description, String address,
+			Location location, int numberOfPeople, boolean parkingLot, boolean wifi, boolean breakfast, boolean halfBoard,
+			boolean fullBoard, boolean tv, boolean kitchen, boolean bathroom) {
 		super();
 		this.name = name;
 		Category = category;
@@ -73,9 +77,25 @@ public class Facility {
 		this.type = type;
 		this.description = description;
 		this.address = address;
-		this.numberOfPepople = numberOfPepople;
+		this.location = location;
+		this.parkingLot = parkingLot;
+		this.wifi = wifi;
+		this.breakfast = breakfast;
+		this.halfBoard = halfBoard;
+		this.fullBoard = fullBoard;
+		this.tv = tv;
+		this.kitchen = kitchen;
+		this.bathroom = bathroom;
+		this.numberOfPeople = numberOfPeople;
 	}
 
+	public int getNumberOfPeople() {
+		return numberOfPeople;
+	}
+
+	public void setNumberOfPeople(int numberOfPeople) {
+		this.numberOfPeople = numberOfPeople;
+	}
 
 	public String getName() {
 		return name;
@@ -137,14 +157,131 @@ public class Facility {
 	}
 
 
-	public int getNumberOfPepople() {
-		return numberOfPepople;
+
+	public Location getLocation() {
+		return location;
 	}
 
 
-	public void setNumberOfPepople(int numberOfPepople) {
-		this.numberOfPepople = numberOfPepople;
+
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
+
+
+
+
+	public boolean isParkingLot() {
+		return parkingLot;
+	}
+
+
+
+
+	public void setParkingLot(boolean parkingLot) {
+		this.parkingLot = parkingLot;
+	}
+
+
+
+
+	public boolean isWifi() {
+		return wifi;
+	}
+
+
+
+
+	public void setWifi(boolean wifi) {
+		this.wifi = wifi;
+	}
+
+
+
+
+	public boolean isBreakfast() {
+		return breakfast;
+	}
+
+
+
+
+	public void setBreakfast(boolean breakfast) {
+		this.breakfast = breakfast;
+	}
+
+
+
+
+	public boolean isHalfBoard() {
+		return halfBoard;
+	}
+
+
+
+
+	public void setHalfBoard(boolean halfBoard) {
+		this.halfBoard = halfBoard;
+	}
+
+
+
+
+	public boolean isFullBoard() {
+		return fullBoard;
+	}
+
+
+
+
+	public void setFullBoard(boolean fullBoard) {
+		this.fullBoard = fullBoard;
+	}
+
+
+
+
+	public boolean isTv() {
+		return tv;
+	}
+
+
+
+
+	public void setTv(boolean tv) {
+		this.tv = tv;
+	}
+
+
+
+
+	public boolean isKitchen() {
+		return kitchen;
+	}
+
+
+
+
+	public void setKitchen(boolean kitchen) {
+		this.kitchen = kitchen;
+	}
+
+
+
+
+	public boolean isBathroom() {
+		return bathroom;
+	}
+
+
+
+
+	public void setBathroom(boolean bathroom) {
+		this.bathroom = bathroom;
+	}
+
+
 
 
 	public Long getId() {

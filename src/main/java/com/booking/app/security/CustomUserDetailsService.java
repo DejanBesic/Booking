@@ -10,10 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.booking.app.model.User;
 import com.booking.app.repository.UserRepository;
 
-/**
- * Created by rajeevkumarsingh on 02/08/17.
- */
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

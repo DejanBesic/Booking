@@ -21,10 +21,6 @@ import com.booking.app.security.JwtAuthenticationEntryPoint;
 import com.booking.app.security.JwtAuthenticationFilter;
 
 
-/**
- * Created by rajeevkumarsingh on 01/08/17.
- */
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(

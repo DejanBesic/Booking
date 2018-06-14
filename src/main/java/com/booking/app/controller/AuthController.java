@@ -54,6 +54,7 @@ public class AuthController {
     	try {
     		authentication = autoLogin(loginRequest.getUsernameOrEmail(), loginRequest.getPassword());
     	}catch(Exception e){
+    		e.printStackTrace();
     		return new ResponseEntity<>("Wrong username or password", HttpStatus.BAD_REQUEST);
     	}
     	

@@ -7,21 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.booking.app.service.impl.FacilityServiceImpl;
+import com.booking.app.service.impl.FacilityTypeServiceImpl;
 
 @RestController
-@RequestMapping("/api/facility")
-public class FacilityController {
+@RequestMapping("/api/types")
+public class FacilityTypeController {
 
 	@Autowired
-	FacilityServiceImpl facilityService;
+	FacilityTypeServiceImpl facilityTypeService;
 
 
     @GetMapping
-    public ResponseEntity<?> getFacilities() {
-    	return new ResponseEntity<>(facilityService.findAll(), HttpStatus.OK);
+    public ResponseEntity<?> getTypes() {
+    	return new ResponseEntity<>(facilityTypeService.findAll(), HttpStatus.OK);
     }
     
-    
 }
-
