@@ -1,0 +1,63 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://booking.xml.com/backendmain/ws-classes"
+           targetNamespace="http://booking.xml.com/backendmain/ws-classes" elementFormDefault="qualified">
+<!--TEST-->
+<xs:element name="testRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="facilityRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="address" type="xs:string"/>
+            	<xs:element name="description" type="xs:string"/>
+            	<xs:element name="name" type="xs:string"/>
+            	<xs:element name="category" type="xs:int"/>
+            	<xs:element name="numberOfPeople" type="xs:int"/>  
+            	<xs:element name="wifi" type="xs:boolean"/>        	
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="facilityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="address" type="xs:string"/>
+            	<xs:element name="description" type="xs:string"/>
+            	<xs:element name="name" type="xs:string"/>
+            	<xs:element name="category" type="xs:int"/>
+            	<xs:element name="numberOfPeople" type="xs:int"/>     
+            	<xs:element name="wifi" type="xs:boolean"/>        	   	
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="testResponse">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+<!--TEST-->
+
+<xs:element name="getDBRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="getDBResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+</xs:schema>
