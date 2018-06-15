@@ -21,10 +21,10 @@ public class Facility {
 	@Column(nullable = false)
 	private int Category;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private User owner;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private FacilityType type;
 	
 	@Column(nullable = true)
@@ -33,7 +33,7 @@ public class Facility {
 	@Column(nullable = false)
 	private String address;
 	
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private Location location;
 	
 	@Column(nullable = false)
