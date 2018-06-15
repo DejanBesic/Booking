@@ -33,6 +33,10 @@ public class Appointment implements Serializable{
 	
 	@ManyToOne(optional = false)
 	private Facility facility;
+	
+	public Appointment() {
+		
+	}
 
 	public Appointment(Date fromDate, Date toDate, double price, Facility facility) {
 		super();

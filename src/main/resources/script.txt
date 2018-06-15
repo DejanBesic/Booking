@@ -31,6 +31,16 @@ insert into RATING values(4, 'Comment 1', 5, 2, 1);
 insert into RATING values(5, 'Comment 1', 5, 1, 2);
 insert into RATING values(6, 'Comment 1', 5, 2, 3);
 
+insert into APPOINTMENT values(1, '2018-04-14', 100, '2018-08-14', 5);
+insert into APPOINTMENT values(2, '2018-08-14', 100, '2018-08-20', 5);
+insert into APPOINTMENT values(3, '2018-05-17', 100, '2018-06-14', 4);
+insert into APPOINTMENT values(4, '2018-04-02', 100, '2018-07-25', 2);
+insert into APPOINTMENT values(5, '2018-06-14', 100, '2018-09-30', 3);
+insert into APPOINTMENT values(6, '2018-10-15', 100, '2018-11-11', 2);
+insert into APPOINTMENT values(7, '2018-06-24', 100, '2018-07-14', 5);
+insert into APPOINTMENT values(8, '2018-06-24', 100, '2018-08-14', 4);
+insert into APPOINTMENT values(9, '2018-05-14', 100, '2018-09-14', 2);
+
 //pass = Bezlosmija43
 
 // twiste regular, bei admin, guxla agent
