@@ -1,14 +1,16 @@
 package com.booking.app.DTOs;
 
+import java.sql.Date;
+
 public class SearchRequest {
 
 	private String location;
 	
 	private int people;
 	
-	private String startDate;
+	private Date startDate;
 	
-	private String endDate;
+	private Date endDate;
 	
 	private int type;
 	
@@ -36,7 +38,7 @@ public class SearchRequest {
 	
 	
 
-	public SearchRequest(String location, int people, String startDate, String endDate, int type, int category,
+	public SearchRequest(String location, int people, Date startDate, Date endDate, int type, int category,
 			boolean parking, boolean wifi, boolean breakfast, boolean halfBoard, boolean fullBoard, boolean tv,
 			boolean kitchen, boolean bathroom) {
 		super();
@@ -74,19 +76,19 @@ public class SearchRequest {
 		this.people = people;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
