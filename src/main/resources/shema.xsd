@@ -1,5 +1,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://booking.xml.com/backendmain/ws-classes"
-           targetNamespace="http://booking.xml.com/backendmain/ws-classes" elementFormDefault="qualified">
+           targetNamespace="http://booking.xml.com/backendmain/ws-classes" xmlns="http://booking.xml.com/backendmain/ws-classes"
+  attributeFormDefault="unqualified" elementFormDefault="qualified">
+
 <!--TEST-->
 <xs:element name="testRequest">
         <xs:complexType>
@@ -9,31 +11,117 @@
         </xs:complexType>
 </xs:element>
 
-<xs:element name="facilityRequest">
-        <xs:complexType>
+<xs:element name="facilityTypeWS">
+        <xs:complexType> 
             <xs:sequence>
-                <xs:element name="address" type="xs:string"/>
-            	<xs:element name="description" type="xs:string"/>
-            	<xs:element name="name" type="xs:string"/>
-            	<xs:element name="category" type="xs:int"/>
-            	<xs:element name="numberOfPeople" type="xs:int"/>  
-            	<xs:element name="wifi" type="xs:boolean"/>        	
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="name" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
 </xs:element>
 
-<xs:element name="facilityResponse">
+<xs:element name="locationWS">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="address" type="xs:string"/>
-            	<xs:element name="description" type="xs:string"/>
-            	<xs:element name="name" type="xs:string"/>
-            	<xs:element name="category" type="xs:int"/>
-            	<xs:element name="numberOfPeople" type="xs:int"/>     
-            	<xs:element name="wifi" type="xs:boolean"/>        	   	
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="name" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
 </xs:element>
+
+<xs:element name="roleWS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="userWS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="name" type="xs:string" />
+                <xs:element name="lastName" type="xs:string"/>
+                <xs:element name="address" type="xs:string"/>
+                <xs:element name="pmb" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+                <xs:element name="passwordConfirm" type="xs:string"/>
+                <xs:element name="email" type="xs:string"/>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="active" type="xs:boolean"/>
+                <xs:element name="role" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="facilityWS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="category" type="xs:int"/>
+                <xs:element name="owner" type="xs:string"/>
+                <xs:element name="type" type="xs:string"/>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="address" type="xs:string"/>
+                <xs:element name="location" type="xs:string"/>
+                <xs:element name="parkingLot" type="xs:boolean"/>
+                <xs:element name="wifi" type="xs:boolean"/>
+                <xs:element name="breakfast" type="xs:boolean"/>
+                <xs:element name="halfBoard" type="xs:boolean"/>
+                <xs:element name="fullBoard" type="xs:boolean"/>
+                <xs:element name="tv" type="xs:boolean"/>
+                <xs:element name="kitchen" type="xs:boolean"/>
+                <xs:element name="bathroom" type="xs:boolean"/>
+                <xs:element name="numberOfPeople" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="appointmentWS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="fromDate" type="xs:date"/>
+                <xs:element name="toDate" type="xs:date"/>
+                <xs:element name="price" type="xs:double"/>
+                <xs:element name="facility" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="reservationWS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="user" type="xs:string"/>
+                <xs:element ref="appointmentWS"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="ratingWS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+                <xs:element name="rating" type="xs:int"/>
+                <xs:element name="comment" type="xs:string"/>
+                <xs:element name="user" type="xs:string"/>
+                <xs:element name="facility" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="agentFacilitiesWS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="facilityWS" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
 
 <xs:element name="testResponse">
 	<xs:complexType>
@@ -42,22 +130,6 @@
 		</xs:sequence>
 	</xs:complexType>
 </xs:element>
-<!--TEST-->
 
-<xs:element name="getDBRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-</xs:element>
-
-<xs:element name="getDBResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-</xs:element>
 
 </xs:schema>

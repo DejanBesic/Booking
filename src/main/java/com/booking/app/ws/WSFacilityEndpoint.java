@@ -1,4 +1,7 @@
 package com.booking.app.ws;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -6,11 +9,16 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.booking.app.model.Facility;
+import com.booking.app.model.User;
 import com.booking.app.service.FacilityService;
-import com.xml.booking.backendmain.ws_classes.FacilityRequest;
-import com.xml.booking.backendmain.ws_classes.FacilityResponse;
+import com.booking.app.service.FacilityTypeService;
+import com.booking.app.service.LocationService;
+import com.booking.app.service.UserService;
+import com.xml.booking.backendmain.ws_classes.AgentFacilitiesWS;
+import com.xml.booking.backendmain.ws_classes.FacilityWS;
 import com.xml.booking.backendmain.ws_classes.TestRequest;
 import com.xml.booking.backendmain.ws_classes.TestResponse;
+import com.xml.booking.backendmain.ws_classes.UserWS;
 
 @Endpoint
 public class WSFacilityEndpoint {
@@ -18,6 +26,15 @@ public class WSFacilityEndpoint {
 	
 	@Autowired
 	private FacilityService facilityService; 
+	
+	@Autowired
+	private FacilityTypeService facilityTypeService; 
+	
+	@Autowired
+	private LocationService locationService; 
+	
+	@Autowired
+	private UserService userService;
 	
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "testRequest")
 	@ResponsePayload
@@ -27,38 +44,74 @@ public class WSFacilityEndpoint {
 		return response;
 	}
 	
-	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "facilityRequest")
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "userWS")
 	@ResponsePayload
-	public FacilityResponse facilityRequest(@RequestPayload FacilityRequest request) {
-		FacilityResponse response = new FacilityResponse();
-		Facility facility = new Facility();
+	public AgentFacilitiesWS getAgentFacilities(@RequestPayload UserWS user) {
+		AgentFacilitiesWS response = new AgentFacilitiesWS();
 		
-		facility.setName(request.getName().toUpperCase());
-		facility.setAddress(request.getAddress());
-		facility.setDescription(request.getDescription());
-		facility.setCategory(request.getCategory());
-		facility.setWifi(request.isWifi());
-		facility.setBathroom(true);
-		facility.setBreakfast(true);
-		facility.setFullBoard(false);
-		facility.setHalfBoard(true);
-		facility.setKitchen(false);
-		facility.setNumberOfPeople(2);
-		facility.setParkingLot(false);
-		facility.setTv(true);
-				
-
-		Facility saved = facilityService.save(facility);
-		if(saved!=null){
-			response.setName(saved.getName());
-			response.setAddress(saved.getAddress());
-			response.setDescription(saved.getDescription());
-			response.setCategory(saved.getCategory());
-		}else{
-			return null;
+		List<Facility> facilities = facilityService.findByOwner(userService.findById(user.getId()));
+		for(Facility f : facilities){
+			response.getFacilityWS().add(facility2WS(f));
 		}
-		//response.setName(request.getName().toUpperCase());
+		
 		return response;
 	}
+
+	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "newFacility")
+	@ResponsePayload
+	public FacilityWS addNewFacility(@RequestPayload FacilityWS facilityWS){
+		
+		Facility saved = facilityService.save(ws2Facility(facilityWS));
+		if(saved==null)
+			return null;
+		
+		return facility2WS(saved);
+	}
+	
+	private FacilityWS facility2WS(Facility facility){
+		FacilityWS res = new FacilityWS();
+		res.setId(facility.getId());
+		res.setName(facility.getName());
+		res.setCategory(facility.getCategory());
+		res.setOwner(facility.getOwner().getUsername());
+		res.setType(facility.getType().getName());
+		res.setDescription(facility.getDescription());
+		res.setAddress(facility.getAddress());
+		res.setLocation(facility.getLocation().getName());
+		res.setParkingLot(facility.isParkingLot());
+		res.setBathroom(facility.isBathroom());
+		res.setWifi(facility.isWifi());
+		res.setBreakfast(facility.isBreakfast());
+		res.setHalfBoard(facility.isHalfBoard());
+		res.setFullBoard(facility.isFullBoard());
+		res.setKitchen(facility.isKitchen());
+		res.setTv(facility.isTv());
+		res.setNumberOfPeople(facility.getNumberOfPeople());
+		
+		return res;
+	}
+	
+	private Facility ws2Facility(FacilityWS facility){
+		Facility res = new Facility();
+		res.setName(facility.getName());
+		res.setCategory(facility.getCategory());
+		res.setOwner(userService.findByUsername(facility.getOwner()));
+		res.setType(facilityTypeService.findByName(facility.getType()));
+		res.setDescription(facility.getDescription());
+		res.setAddress(facility.getAddress());
+		res.setLocation(locationService.findByName(facility.getLocation()));
+		res.setParkingLot(facility.isParkingLot());
+		res.setBathroom(facility.isBathroom());
+		res.setWifi(facility.isWifi());
+		res.setBreakfast(facility.isBreakfast());
+		res.setHalfBoard(facility.isHalfBoard());
+		res.setFullBoard(facility.isFullBoard());
+		res.setKitchen(facility.isKitchen());
+		res.setTv(facility.isTv());
+		res.setNumberOfPeople(facility.getNumberOfPeople());
+		
+		return res;
+	}
+	
 	
 }

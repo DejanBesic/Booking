@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.booking.app.DTOs.SearchRequest;
 import com.booking.app.model.Facility;
+import com.booking.app.model.User;
 import com.booking.app.repository.FacilityRepository;
 import com.booking.app.service.FacilityService;
 
@@ -179,6 +180,12 @@ public class FacilityServiceImpl implements FacilityService{
 	    			}
 	    		}).collect(Collectors.toList());
 
+	}
+
+	@Override
+	public List<Facility> findByOwner(User user) {
+		// TODO Auto-generated method stub
+		return facilityRepository.findByOwner(user);
 	}
 	
 }
