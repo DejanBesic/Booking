@@ -6,7 +6,7 @@
 <xs:element name="testRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
+                <xs:element name="name" type="xs:string"/> 
             </xs:sequence>
         </xs:complexType>
 </xs:element>

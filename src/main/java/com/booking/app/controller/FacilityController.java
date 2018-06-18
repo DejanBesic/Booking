@@ -32,10 +32,10 @@ public class FacilityController {
     @PostMapping(value="/search")
     public ResponseEntity<?> search(@RequestBody SearchRequest searchRequest){
     	if(searchRequest.getLocation().isEmpty() || searchRequest.getPeople() == 0 ||
-    			searchRequest.getStartDate() == null || searchRequest.getStartDate().isEmpty() ||
-				searchRequest.getEndDate() == null || searchRequest.getEndDate().isEmpty()) {
+    			searchRequest.getStartDate() == null ||
+				searchRequest.getEndDate() == null ) {
     		
-    		return new ResponseEntity<>("Location, start date, end date and number of people are required.", HttpStatus.BAD_REQUEST);
+    		return new ResponseEntity<>("Location, date and number of people are required.", HttpStatus.BAD_REQUEST);
     	}
     	
     	return new ResponseEntity<>(appointmentService.findBySearch(searchRequest), HttpStatus.OK);
